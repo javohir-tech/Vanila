@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 class Category(models.Model) :
-    name = models.TextField(max_length=150)
+    name = models.CharField(max_length=150)
 
 class New(models.Model):
 
