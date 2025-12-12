@@ -2,6 +2,10 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 
+class PublishedManager(models.Manager) :
+    
+    def get_queryset(self) :
+        return super().get_queryset().filter(status = New.Status.Published)
 
 class Category(models.Model):
     name = models.CharField(max_length=150)
@@ -19,7 +23,7 @@ class New(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique=True, blank=True)
     body = models.TextField()
-    image = models.ImageField(upload_to="news/images" , blank=True)
+    image = models.ImageField(upload_to="news/images", blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     publish_time = models.DateTimeField(default=timezone.now)
     created_time = models.DateTimeField(auto_now_add=True)
@@ -27,6 +31,9 @@ class New(models.Model):
     status = models.CharField(
         max_length=2, choices=Status.choices, default=Status.Draft
     )
+
+    objects = models.Manager()
+    published = PublishedManager()
 
     class Meta:
         ordering = ["-publish_time"]
