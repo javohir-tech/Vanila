@@ -19,7 +19,7 @@ class New(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique=True, blank=True)
     body = models.TextField()
-    image = models.ImageField(upload_to="news/images")
+    image = models.ImageField(upload_to="news/images" , blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     publish_time = models.DateTimeField(default=timezone.now)
     created_time = models.DateTimeField(auto_now_add=True)
