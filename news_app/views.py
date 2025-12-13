@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import New
+from .models import New , Category
 from django.shortcuts import get_object_or_404
 
 def news_list(request) :
@@ -19,3 +19,16 @@ def news_detail(request , id) :
     }
     
     return render(request , "news/news_detail.html" , context=context)
+
+
+def indexViews(request) :
+    news_list =  New.objects.all()
+    categories = Category.objects.all()
+
+    context = {
+        'news_list' : news_list,
+        'categories' : categories
+    }
+
+    return render(request , 'news/index.html' , context = context)
+
