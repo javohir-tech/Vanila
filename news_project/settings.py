@@ -111,7 +111,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'Django.contrib.staticfiles.finders.AppDirecotryFinder'
+    # 'django.contrib.staticfiles.finders.'
 ]
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
