@@ -25,12 +25,15 @@ def news_detail(request, id):
 
 
 def indexViews(request):
-    news_list = New.published.all().order_by('-publish_time')[:5]
     categories = Category.objects.all()
-
+    news_list = New.published.all().order_by('-publish_time')[:5]
+    local_main = New.published.all().filter(category__name = 'Mahalliy').order_by('-publish_time')[:1]
+    local_list = New.published.all().filter(category__name='Mahalliy').order_by('-publish_time')[1:6]
     context = {
+        'categories': categories,
         'news_list': news_list,
-        'categories': categories
+        'local_main' : local_main,
+        'local_list' : local_list
     }
 
     return render(request, 'news/index.html', context=context)
