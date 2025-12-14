@@ -25,7 +25,7 @@ def news_detail(request, id):
 
 
 def indexViews(request):
-    news_list = New.objects.all()
+    news_list = New.published.all().order_by('-publish_time')[:5]
     categories = Category.objects.all()
 
     context = {
