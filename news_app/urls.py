@@ -4,11 +4,13 @@ from .views import  (
     news_detail ,
     indexViews,
     ContactView,
-    ErrorView
+    HomePageView,
+    ErrorView,
+    
 )
 
 urlpatterns = [
-    path('' , indexViews , name='home'),
+    path('' ,  HomePageView.as_view(), name='home'),
     path("all/" , news_list, name = 'all_news_list'),
     path('news/<int:id>/' , news_detail , name='news_detail'),
     path('contact-us/' , ContactView.as_view() , name='contact-us'),
