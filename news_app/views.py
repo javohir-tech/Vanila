@@ -35,18 +35,6 @@ def indexViews(request):
 
     return render(request, 'news/index.html', context=context)
 
-
-# def ContactView(request):
-#    form = ContactForm(request.POST or None)
-#    if request.method == 'POST' and form.is_valid():
-#        form.save()
-#        return HttpResponse("<h2>Habar jonatildi</h2>")
-#    context = {
-#        "form" : form
-#    }
-   
-#    return render(request , "news/contact.html" , context)
-
 class ContactView(TemplateView) :
     template_name = 'news/contact.html'
     
