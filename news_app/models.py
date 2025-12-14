@@ -40,3 +40,12 @@ class New(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+
+class Contact(models.Model):
+    name =  models.CharField(max_length=150)
+    email = models.EmailField(max_length=150)
+    message = models.TextField()
+    
+    def __str__(self):
+        return self.email
