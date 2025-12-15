@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from django.urls import reverse
 from .managers import PublishedManager
 
 class Category(models.Model):
@@ -40,6 +41,10 @@ class New(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+        
+    def get_absolute_url(self):
+        return reverse("news_detail" , kwargs={'slug' : self.slug})
+    
 
 
 class Contact(models.Model):

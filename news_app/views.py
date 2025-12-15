@@ -13,8 +13,8 @@ def news_list(request):
     return render(request, "news/news_list.html", context=context)
 
 
-def news_detail(request, id):
-    new_list = get_object_or_404(New, id=id)
+def news_detail(request, slug):
+    new_list = get_object_or_404(New, slug=slug)
 
     context = {"news": new_list}
 
