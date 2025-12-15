@@ -53,17 +53,28 @@ class HomePageView(ListView):
         context = super().get_context_data(**kwargs)
         context["news_list"] = New.published.all().order_by("-publish_time")[:5]
         context["categories"] = Category.objects.all()
-        context["local_main"] = (
-            New.published.all()
-            .filter(category__name="Mahalliy")
-            .order_by("-publish_time")[:1]
-        )
         context["local_list"] = (
             New.published.all()
             .filter(category__name="Mahalliy")
-            .order_by("-publish_time")[1:6]
+            .order_by("-publish_time")[:5]
         )
-        return context 
+        context["xorij_list"] = (
+            New.published.all()
+            .filter(category__name="Xorij")
+            .order_by("-publish_time")[:5]
+        )
+        context["texnologic_list"] = (
+            New.published.all()
+            .filter(category__name="Texnalogiya")
+            .order_by("-publish_time")[:5]
+        )
+        context["sport_list"] = (
+            New.published.all()
+            .filter(category__name="Sport")
+            .order_by("-publish_time")[:5]
+        )
+        return context
+
 
 class ContactView(TemplateView):
     template_name = "news/contact.html"
