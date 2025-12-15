@@ -1,4 +1,4 @@
-from .models import New
+from .models import New , Category
 
 def last_news(request) :
     
@@ -9,4 +9,13 @@ def last_news(request) :
     }
     
     return context
+
+def categories_list(request):
     
+    categories_list = Category.objects.all()
+    
+    context = {
+        'categories' : categories_list
+    }
+    
+    return context

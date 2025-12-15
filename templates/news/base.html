@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>NewsFeed</title>
+    <title>{% block title %} NewsFeed {% endblock title %}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -132,16 +132,11 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4">
                         <div class="footer_widget wow fadeInDown">
-                            <h2>Tag</h2>
+                            <h2>Kategoriyalar</h2>
                             <ul class="tag_nav">
-                                <li><a href="#">Games</a></li>
-                                <li><a href="#">Sports</a></li>
-                                <li><a href="#">Fashion</a></li>
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Life &amp; Style</a></li>
-                                <li><a href="#">Technology</a></li>
-                                <li><a href="#">Photo</a></li>
-                                <li><a href="#">Slider</a></li>
+                                {% for category in categories %}
+                                <li><a href="#">{{category.name}}</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
