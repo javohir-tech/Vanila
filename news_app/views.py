@@ -92,3 +92,19 @@ class ContactView(TemplateView):
 
 def ErrorView(request):
     return render(request, "news/404.html", {})
+
+
+class LocalPageView(ListView):
+    model = New
+    template_name = "news/local.html"
+    context_object_name = "news_list"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["local_list"] = (
+            New.published.all()
+            .filter(category__name="Mahalliy")
+            .order_by("-publish_time")
+        )
+        return context 

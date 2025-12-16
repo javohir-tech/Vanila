@@ -6,7 +6,7 @@ from .views import  (
     ContactView,
     HomePageView,
     ErrorView,
-    
+    LocalPageView
 )
 
 urlpatterns = [
@@ -14,5 +14,6 @@ urlpatterns = [
     path("all/" , news_list, name = 'all_news_list'),
     path('news/<slug:slug>/' , news_detail , name='news_detail'),
     path('contact-us/' , ContactView.as_view() , name='contact-us'),
-    path('404/' , ErrorView , name='404')
+    path('404/' , ErrorView , name='404'),
+    path('local/' , LocalPageView.as_view() , name = 'local_page')
 ]
