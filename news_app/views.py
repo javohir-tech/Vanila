@@ -3,7 +3,7 @@ from .models import New, Category, Contact
 from django.shortcuts import get_object_or_404
 from .forms import ContactForm
 from django.http import HttpResponse
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 
 
 def news_list(request):
@@ -19,6 +19,19 @@ def news_detail(request, slug):
     context = {"news": new_list}
 
     return render(request, "news/news_detail.html", context=context)
+
+
+class DetailPageNews(DetailView):
+    model = New
+    template_name = "news/single_page.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["news"] = self.object
+        context["related_posts"] = New.published.all().exclude(id=self.object.id).filter(
+            category__name=self.object.category
+        ).order_by('?')[:3]
+        return context
 
 
 def indexViews(request):
@@ -150,5 +163,8 @@ class TexnologyPageView(ListView):
             .filter(category__name="Texnalogiya")
             .order_by("-publish_time")
         )
-        
+
         return context
+
+
+# class DetailPageView(DetailView , ):
