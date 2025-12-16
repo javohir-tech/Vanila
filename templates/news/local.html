@@ -5,11 +5,11 @@
 {% block title %}Mahalliy Habarlar{% endblock title %}
 
 {% block content %}
-<div class="container">
+<div>
     {% for news in local_list %}
     <div>
         <a href="{{news.get_absolute_url}}">
-            <img class="img-fluid " src="{{news.image.url}}">
+            <img class="img-fluid " src="{{news.image.url}}" alt="{{news.slug}}">
             <h3>{{news.title}}</h3>
         </a>
     </div>
