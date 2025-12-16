@@ -27,10 +27,13 @@ class DetailPageNews(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
         context["news"] = self.object
+        
         context["related_posts"] = New.published.all().exclude(id=self.object.id).filter(
             category__name=self.object.category
         ).order_by('?')[:3]
+        
         return context
 
 
