@@ -1,0 +1,18 @@
+{% extends "news/base.html" %}
+
+{ % load static % }
+
+{% block title %}Xorij Habarlar{% endblock title %}
+
+{% block content %}
+<div>
+    {% for news in foreign_list %}
+    <div>
+        <a href="{{news.get_absolute_url}}">
+            <img class="img-fluid " src="{{news.image.url}}" alt="{{news.slug}}">
+            <h3>{{news.title}}</h3>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

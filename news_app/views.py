@@ -109,6 +109,7 @@ class LocalPageView(ListView):
         )
         return context
 
+
 class SportPageView(ListView):
     model = New
     template_name = "news/sport_page.html"
@@ -119,8 +120,9 @@ class SportPageView(ListView):
         context["sport_list"] = (
             New.published.all().filter(category__name="Sport").order_by("-publish_time")
         )
-        
+
         return context
+
 
 class ForeignPageView(ListView):
     model = New
@@ -128,25 +130,25 @@ class ForeignPageView(ListView):
     context_object_name = "news"
 
     def get_context_data(self, **kwargs):
-        context = super.get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["foreign_list"] = (
             New.published.all().filter(category__name="Xorij").order_by("-publish_time")
         )
-        
+
         return context
 
 
 class TexnologyPageView(ListView):
     model = New
-    template_name = 'news/texnology_page.html'
-    context_object_name = 'news'
-    
+    template_name = "news/texnology_page.html"
+    context_object_name = "news"
+
     def get_context_data(self, **kwargs):
-        context  = super().get_context_data(**kwargs)
-        context['tex_list'] = (
+        context = super().get_context_data(**kwargs)
+        context["texno_list"] = (
             New.published.all()
-            .filter(category__name = 'Texnologiya')
-            .order_by('-publish_tome')
+            .filter(category__name="Texnalogiya")
+            .order_by("-publish_time")
         )
         
-        return  context
+        return context

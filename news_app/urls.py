@@ -6,7 +6,10 @@ from .views import  (
     ContactView,
     HomePageView,
     ErrorView,
-    LocalPageView
+    LocalPageView,
+    SportPageView,
+    ForeignPageView,
+    TexnologyPageView
 )
 
 urlpatterns = [
@@ -15,5 +18,8 @@ urlpatterns = [
     path('news/<slug:slug>/' , news_detail , name='news_detail'),
     path('contact-us/' , ContactView.as_view() , name='contact-us'),
     path('404/' , ErrorView , name='404'),
-    path('local/' , LocalPageView.as_view() , name = 'local_page')
+    path('local/' , LocalPageView.as_view() , name = 'local_page'),
+    path('sport/' ,SportPageView.as_view() , name = 'sport_page'),
+    path('texno/' , TexnologyPageView.as_view() , name = 'texno_page'),
+    path('foreign/' , ForeignPageView.as_view() , name='foreign_page')
 ]
