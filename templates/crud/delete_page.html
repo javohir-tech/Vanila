@@ -1,0 +1,17 @@
+{% extends "news/base.html" %}
+
+{ % load static % }
+
+{% block title %}Sport Habarlar{% endblock title %}
+
+{% block content %}
+<div>
+    <div class="py-3">
+        <form method="post">{% csrf_token %}
+            <p>{{news.title | truncatewords:4 }} O'chirasizmi </p>
+            {{form.as_p}}
+            <button type="submit" class="btn btn-danger">Tasdiqlayman</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

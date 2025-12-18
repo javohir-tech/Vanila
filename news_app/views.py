@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from .forms import ContactForm
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView, DetailView , UpdateView , DeleteView
+from django.urls import reverse_lazy , reverse
 
 
 def news_list(request):
@@ -178,5 +179,7 @@ class UpdatePageView(UpdateView) :
 class DeletePageView(DeleteView) :
     model = New
     template_name = 'crud/delete_page.html'
+    context_object_name = 'news'
+    success_url = reverse_lazy('home')
 
 # class DetailPageView(DetailView , ):

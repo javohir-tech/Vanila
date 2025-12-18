@@ -1,0 +1,16 @@
+{% extends "news/base.html" %}
+
+{ % load static % }
+
+{% block title %}Sport Habarlar{% endblock title %}
+
+{% block content %}
+<div>
+    <div>
+        <form method="post">{% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-success">Tahrirlash</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
