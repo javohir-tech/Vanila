@@ -3,7 +3,7 @@ from .models import New, Category, Contact
 from django.shortcuts import get_object_or_404
 from .forms import ContactForm
 from django.http import HttpResponse
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView , UpdateView , DeleteView
 
 
 def news_list(request):
@@ -169,5 +169,14 @@ class TexnologyPageView(ListView):
 
         return context
 
+
+class UpdatePageView(UpdateView) :
+    model = New
+    template_name = 'crud/update_page.html'
+    fields = ('title' , 'body' , 'image' , 'status' , 'category')   
+    
+class DeletePageView(DeleteView) :
+    model = New
+    template_name = 'crud/delete_page.html'
 
 # class DetailPageView(DetailView , ):

@@ -2,7 +2,11 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 from django.urls import reverse
-from .managers import PublishedManager
+# from .managers import PublishedManager
+
+class PublishedManager(models.Manager) :
+    def get_queryset(self):
+        return super().get_queryset().filter(status  =  New.Status.Published)
 
 class Category(models.Model):
     name = models.CharField(max_length=150)
