@@ -1,8 +1,8 @@
 from django.urls import path
 from .views import  (
     news_list ,
-    news_detail ,
-    indexViews,
+    # news_detail ,
+    # indexViews,
     ContactView,
     HomePageView,
     ErrorView,

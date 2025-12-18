@@ -174,7 +174,10 @@ class TexnologyPageView(ListView):
 class UpdatePageView(UpdateView) :
     model = New
     template_name = 'crud/update_page.html'
-    fields = ('title' , 'body' , 'image' , 'status' , 'category')   
+    fields = ('title' , 'body' , 'image' , 'status' , 'category')  
+    context_object_name = 'news' 
+    
+        
     
 class DeletePageView(DeleteView) :
     model = New
