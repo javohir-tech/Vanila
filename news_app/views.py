@@ -3,8 +3,15 @@ from .models import New, Category, Contact
 from django.shortcuts import get_object_or_404
 from .forms import ContactForm
 from django.http import HttpResponse
-from django.views.generic import TemplateView, ListView, DetailView , UpdateView , DeleteView , CreateView
-from django.urls import reverse_lazy , reverse
+from django.views.generic import (
+    TemplateView,
+    ListView,
+    DetailView,
+    UpdateView,
+    DeleteView,
+    CreateView,
+)
+from django.urls import reverse_lazy, reverse
 
 
 def news_list(request):
@@ -28,13 +35,16 @@ class DetailPageNews(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         context["news"] = self.object
-        
-        context["related_posts"] = New.published.all().exclude(id=self.object.id).filter(
-            category__name=self.object.category
-        ).order_by('?')[:3]
-        
+
+        context["related_posts"] = (
+            New.published.all()
+            .exclude(id=self.object.id)
+            .filter(category__name=self.object.category)
+            .order_by("?")[:3]
+        )
+
         return context
 
 
@@ -171,23 +181,24 @@ class TexnologyPageView(ListView):
         return context
 
 
-class UpdatePageView(UpdateView) :
+class UpdatePageView(UpdateView):
     model = New
-    template_name = 'crud/update_page.html'
-    fields = ('title' , 'body' , 'image' , 'status' , 'category')  
-    context_object_name = 'news' 
-    
-        
-    
-class DeletePageView(DeleteView) :
+    template_name = "crud/update_page.html"
+    fields = ("title", "body", "image", "status", "category")
+    context_object_name = "news"
+
+
+class DeletePageView(DeleteView):
     model = New
-    template_name = 'crud/delete_page.html'
-    context_object_name = 'news'
-    success_url = reverse_lazy('home')
-    
-class CreateNewsView(CreateView) :
+    template_name = "crud/delete_page.html"
+    context_object_name = "news"
+    success_url = reverse_lazy("home")
+
+
+class CreateNewsView(CreateView):
     model = New
-    fields = ('title' , 'slug' , 'image' , 'body' , 'status' , 'category' )
-    template_name = 'crud/create_news.html'
+    fields = ("title", "image", "body", "status", "category")
+    template_name = "crud/create_news.html"
+
 
 # class DetailPageView(DetailView , ):
