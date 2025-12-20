@@ -1,0 +1,12 @@
+{% extends "news/base.html" %}
+
+{% block title %}Login Sahifasi{% endblock title %}
+
+{% block content %}
+<p>Qaytganingizdan hursatndmiz</p>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Kirish</button>
+    </form>
+{% endblock content %}
