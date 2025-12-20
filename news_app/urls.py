@@ -12,7 +12,8 @@ from .views import  (
     TexnologyPageView, 
     DetailPageNews, 
     UpdatePageView,
-    DeletePageView
+    DeletePageView,
+    CreateNewsView
 )
 
 urlpatterns = [
@@ -21,6 +22,7 @@ urlpatterns = [
     path('news/<slug:slug>/' , DetailPageNews.as_view() , name='news_detail'),
     path('news/<slug>/edit' , UpdatePageView.as_view() , name='news_edit'),
     path('news/<slug>/delete' ,DeletePageView.as_view() , name='news_delete' ),
+    path('news/create', CreateNewsView.as_view(), name="create_news"),
     path('contact-us/' , ContactView.as_view() , name='contact-us'),
     path('404/' , ErrorView , name='404'),
     path('local/' , LocalPageView.as_view() , name = 'local_page'),
