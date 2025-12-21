@@ -28,5 +28,11 @@ def login_view(request):
         form  = LoginForms()
         return render(request , 'registrations/login.html' , context={'form' : form})
         
-
+def dashbord_view(request) :
+    user  =  request.user
+    context = {
+        'user':user
+    }
+    
+    return render(request , 'pages/profile.html' , context) 
 # Create your views here.
