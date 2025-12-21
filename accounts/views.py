@@ -45,9 +45,9 @@ def register_view(request):
             new_user.save()
             context = {"new_user": new_user}
 
-            return render(request, "account/register_done.html", context=context)
+            return render(request, "account/register_done.html", context)
     else:
         user_form = UserRegistrationForm()
         context = {"user_form": user_form}
 
-        return render(request, "account/regiter.html", context)
+        return render(request, "account/register.html", context)
