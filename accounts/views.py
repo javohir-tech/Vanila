@@ -39,23 +39,23 @@ def dashbord_view(request):
 
 
 def register_view(request):
-    pass
-    # if request.method == "POST":
-    #     user_form = UserRegisterCloneForm(request.POST)
-    #     print(user_form , 'userform')
-    #     if user_form.is_valid():
-    #         new_user = user_form.save(commit=False)
-    #         print(user_form.cleaned_data)
-    #         new_user.set_password(user_form.cleaned_data["password"])
-    #         new_user.save()
-    #         context = {"new_user": new_user}
+    # pass
+    if request.method == "POST":
+        user_form = UserRegisterCloneForm(request.POST)
+        print(user_form , 'userform')
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            print(user_form.cleaned_data)
+            new_user.set_password(user_form.cleaned_data["password"])
+            new_user.save()
+            context = {"new_user": new_user}
 
-    #         return render(request, "account/register_done.html", context)
-    # else:
-    #     user_form = UserRegisterCloneForm()
-    #     context = {"user_form": user_form}
+            return render(request, "account/register_done.html", context)
+    else:
+        user_form = UserRegisterCloneForm()
+        context = {"user_form": user_form}
 
-    #     return render(request, "account/register.html", context)
+        return render(request, "account/register.html", context)
     
     
 class SingUpView(CreateView) :

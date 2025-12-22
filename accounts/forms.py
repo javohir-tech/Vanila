@@ -16,20 +16,20 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class UserRegisterCloneForm(forms.ModelForm):
-    pass
-    # password = forms.CharField(widget=forms.PasswordInput, label="parol")
-    # confirm_password = forms.CharField(widget=forms.PasswordInput, label="qayta parol")
+    # pass
+    password = forms.CharField(widget=forms.PasswordInput, label="parol")
+    confirm_password = forms.CharField(widget=forms.PasswordInput, label="qayta parol")
 
-    # class Meta :
-    #     model = User
-    #     fields = ['username','email' , 'first_name']
+    class Meta :
+        model = User
+        fields = ['username','email' , 'first_name']
         
-    # def clean(self) :
-    #     data = super().clean()
-    #     password1 = data.get('password')
-    #     password2 = data.get('confirm_password')
+    def clean(self) :
+        data = super().clean()
+        password1 = data.get('password')
+        password2 = data.get('confirm_password')
         
-    #     if password1  and password1 != password2 :
-    #         raise   forms.ValidationError('Password not match')
+        if password1  and password1 != password2 :
+            raise   forms.ValidationError('Password not match')
         
-    #     return data
+        return data
