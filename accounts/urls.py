@@ -38,5 +38,6 @@ urlpatterns = [
         PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
-    path("singup/" , SingUpView.as_view() , name='sing_up'),
+    # path("singup/" , SingUpView.as_view() , name='sing_up'),
+    path('singup/' , register_view , name='sing_up')
 ]
