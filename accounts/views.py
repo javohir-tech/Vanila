@@ -49,10 +49,10 @@ def register_view(request):
     # pass
     if request.method == "POST":
         user_form = UserRegisterCloneForm(request.POST)
-        print(user_form, "userform")
+        # print(user_form, "userform")
         if user_form.is_valid():
             new_user = user_form.save(commit=False)
-            print(user_form.cleaned_data)
+            # print(user_form.cleaned_data)
             new_user.set_password(user_form.cleaned_data["password"])
             new_user.save()
             ProfileModel.objects.create(user=new_user)
@@ -81,7 +81,7 @@ def ProfileEditView(request):
             user_form.save()
             user_profile.save()
     else:
-        user_form = UserEditForm(instance=request.user)
+        user_form = UserEditForm()
         user_profile = ProfileEditForm(instance=request.user.profilemodel)
     
     return render(
