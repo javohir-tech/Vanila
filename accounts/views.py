@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import LoginForms, UserRegistrationForm
+from django.views.generic import CreateView
+from django.urls  import reverse_lazy
 
 
 def login_view(request):
@@ -51,3 +53,11 @@ def register_view(request):
         context = {"user_form": user_form}
 
         return render(request, "account/register.html", context)
+    
+    
+class SingUpView(CreateView) :
+    template_name = 'account/register.html'
+    success_url = reverse_lazy('login')
+    form_class = UserRegistrationForm
+    
+# class RegisterUserView()
