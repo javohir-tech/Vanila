@@ -35,7 +35,8 @@ def login_view(request):
 
     else:
         form = LoginForms()
-        return render(request, "registrations/login.html", context={"form": form})
+    
+    return render(request, "registrations/login.html", context={"form": form})
 
 
 def dashbord_view(request):
