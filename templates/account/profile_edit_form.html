@@ -1,0 +1,17 @@
+{% extends "news/base.html" %}
+
+{% load static %}
+
+{% block title %}Profilni tahrirlash {% endblock title%}
+
+{% block content %}
+<h4>Profilni tahrirlash </h4>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{user_form.as_p}}
+        {{user_profile.as_p}}
+        <button class="btn btn-primary" type="submit">Saqlash</button>
+    </form>
+
+{% endblock content %}

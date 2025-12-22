@@ -1,8 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
-
+from .models import ProfileModel
 class LoginForms(forms.Form):
     username = forms.CharField(max_length=50)
     password = forms.CharField(widget=forms.PasswordInput)
@@ -33,3 +32,14 @@ class UserRegisterCloneForm(forms.ModelForm):
             raise   forms.ValidationError('Password not match')
         
         return data
+    
+class  UserEditForm(forms.ModelForm):
+    class Meta :
+        model = User
+        fields = ['username' , 'first_name' , 'last_name' , 'email']
+
+
+class ProfileEditForm(forms.ModelForm) :
+    class Meta :
+        model = ProfileModel
+        fields  = ['image' , 'date_of_birth']
