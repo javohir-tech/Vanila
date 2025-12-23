@@ -74,16 +74,16 @@ class SingUpView(CreateView):
 
 
 def ProfileEditView(request):
-    print(request)
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
-        user_profile = ProfileEditForm(instance=request.user.profilemodel, data=request.POST , files=request.FILES)
+        user_profile = ProfileEditForm(instance=request.user.profile, data=request.POST , files=request.FILES)
         if user_form.is_valid() and user_profile.is_valid():
             user_form.save()
             user_profile.save()
     else:
+        print(request.user)
         user_form = UserEditForm()
-        user_profile = ProfileEditForm(instance=request.user.profilemodel)
+        user_profile = ProfileEditForm(instance=request.user.profile)
     
     return render(
         request,

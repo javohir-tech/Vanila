@@ -10,7 +10,7 @@ from django.contrib.auth.models import AbstractUser, User
 
 
 class ProfileModel(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE , related_name='profile')
     image = models.ImageField(upload_to="users/", blank=True, null=True)
     date_of_birth = models.DateTimeField(blank=True , null=True)
     
