@@ -10,4 +10,6 @@
         <button type="submit" class="btn btn-primary">Kirish</button>
     </form>
     <a href="{% url 'password_reset' %}" type="submit" class="btn btn-success">Parolni tiklash</a>
+    <h4 class="text-warning">Agar Profilingiz bo'lmasa royhatdan oting</h4>
+    <a href="{% url 'sing_up' %}" class="btn btn-primary">Ro'yhatdan o'tish</a>
 {% endblock content %}

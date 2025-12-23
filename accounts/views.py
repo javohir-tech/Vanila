@@ -11,6 +11,8 @@ from .forms import (
 from django.views.generic import CreateView , View
 from django.urls import reverse_lazy
 from .models import ProfileModel 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def login_view(request):
@@ -38,7 +40,7 @@ def login_view(request):
 
     return render(request, "registrations/login.html", context={"form": form})
 
-
+@login_required
 def dashbord_view(request):
     user = request.user
     profile = request.user.profile
@@ -73,7 +75,7 @@ class SingUpView(CreateView):
     success_url = reverse_lazy("login")
     form_class = UserRegistrationForm
 
-
+@login_required
 def ProfileEditView(request):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
@@ -94,7 +96,7 @@ def ProfileEditView(request):
     )
     
     
-class UserProfileView(View) :
+class UserProfileEditView(LoginRequiredMixin , View) :
     
     def post(self , request) :
         user_form = UserEditForm(instance=request.user, data=request.POST)
