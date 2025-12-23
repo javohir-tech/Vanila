@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import (
@@ -8,9 +8,9 @@ from .forms import (
     UserEditForm,
     ProfileEditForm,
 )
-from django.views.generic import CreateView
+from django.views.generic import CreateView , View
 from django.urls import reverse_lazy
-from .models import ProfileModel
+from .models import ProfileModel 
 
 
 def login_view(request):
@@ -35,13 +35,14 @@ def login_view(request):
 
     else:
         form = LoginForms()
-    
+
     return render(request, "registrations/login.html", context={"form": form})
 
 
 def dashbord_view(request):
     user = request.user
-    context = {"user": user}
+    profile = request.user.profile
+    context = {"user": user , "profile" : profile}
 
     return render(request, "pages/profile.html", context)
 
@@ -76,20 +77,44 @@ class SingUpView(CreateView):
 def ProfileEditView(request):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
-        user_profile = ProfileEditForm(instance=request.user.profile, data=request.POST , files=request.FILES)
+        user_profile = ProfileEditForm(
+            instance=request.user.profile, data=request.POST, files=request.FILES
+        )
         if user_form.is_valid() and user_profile.is_valid():
             user_form.save()
             user_profile.save()
     else:
-        print(request.user)
-        user_form = UserEditForm()
+        user_form = UserEditForm(instance=request.user)
         user_profile = ProfileEditForm(instance=request.user.profile)
-    
+
     return render(
         request,
         "account/profile_edit_form.html",
         {"user_form": user_form, "user_profile": user_profile},
     )
+    
+    
+class UserProfileView(View) :
+    
+    def post(self , request) :
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        user_profile = ProfileEditForm(
+            instance=request.user.profile, data=request.POST, files=request.FILES
+        )
+        if user_form.is_valid() and user_profile.is_valid():
+            user_form.save()
+            user_profile.save()
+        return redirect('profile')
+    def get(self , request) :
+        user_form = UserEditForm(instance=request.user)
+        user_profile = ProfileEditForm(instance=request.user.profile)
+
+        return render(
+            request,
+            "account/profile_edit_form.html",
+            {"user_form": user_form, "user_profile": user_profile},
+        )
+
 
 
 # class RegisterUserView()
