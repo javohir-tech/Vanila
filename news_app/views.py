@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from .models import New, Category, Contact
+from django.shortcuts import render , redirect
+from .models import New, Category, Contact, Comment
 from django.shortcuts import get_object_or_404
-from .forms import ContactForm
+from .forms import ContactForm, CommentFrom
 from django.http import HttpResponse
 from django.views.generic import (
     TemplateView,
@@ -15,7 +15,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .user_permitions import OnlyLoggedSuperUsers
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required , user_passes_test
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 def news_list(request):
@@ -37,11 +37,21 @@ class DetailPageNews(DetailView):
     model = New
     template_name = "news/single_page.html"
 
+    def post(self, request , *args, **kwargs):
+        self.object = self.get_object()
+        
+        comment_form = CommentFrom(data=request.POST)
+        if comment_form.is_valid() :
+            new_form = comment_form.save(commit=False)
+            new_form.news = self.object
+            new_form.user = request.user
+            new_form.save()
+           
+        return  redirect(request.path)  
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context["news"] = self.object
-
+        context['comment_form'] = CommentFrom()
         context["related_posts"] = (
             New.published.all()
             .exclude(id=self.object.id)
@@ -203,17 +213,17 @@ class CreateNewsView(OnlyLoggedSuperUsers, CreateView):
     model = New
     fields = ("title", "image", "body", "status", "category")
     template_name = "crud/create_news.html"
-    
+
+
 @login_required
-@user_passes_test(lambda  u: u.is_superuser)
-def admin_users_view(request) :
-    
-    admin = User.objects.filter(is_superuser = True)
-    
-    context = {
-        'admin_users' : admin
-    }
-    
-    return render(request , 'news/admin_page.html' , context)
+@user_passes_test(lambda u: u.is_superuser)
+def admin_users_view(request):
+
+    admin = User.objects.filter(is_superuser=True)
+
+    context = {"admin_users": admin}
+
+    return render(request, "news/admin_page.html", context)
+
 
 # class DetailPageView(DetailView , ):

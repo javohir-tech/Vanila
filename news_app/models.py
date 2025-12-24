@@ -69,7 +69,7 @@ class Comment(models.Model) :
     active = models.BooleanField(default=True)
     
     class Meta :
-        ordering = ['created_time' , ]
+        ordering = ['created_time' ,]
         
     def __str__(self):
         return f"{self.body}"

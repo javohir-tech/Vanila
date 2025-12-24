@@ -31,6 +31,20 @@
             </div>
             {% endif %}
           </div>
+          <div>
+            <div>
+              {% for comment in news.comments.all %}
+                <p>{{comment.body}}</p>
+              {% endfor %}
+            </div>
+            <div>
+              <form method="post">
+                {% csrf_token %}
+                {{comment_form.as_p}}
+                <button class="btn btn-primary" type="submit">Joylash</button>
+              </form>
+            </div>
+          </div>
           <div class="social_link">
             <ul class="sociallink_nav">
               <li><a href="#"><i class="fa fa-facebook"></i></a></li>
