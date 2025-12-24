@@ -46,17 +46,6 @@ class DetailPageNews(DetailView):
             new_form.news = self.object
             new_form.user = request.user
             new_form.save()
-        
-        print(new_form , 'helloooooooooooooooooooooo')   
-        print("\n" + "="*50)
-        print("📤 TO'G'RI YO'NALISH (Comment → News)")
-        print("="*50)
-        print(f"Comment ID: {new_form.id}")
-        print(f"Comment body: {new_form.body}")
-        print(f"Comment.news: {new_form.news}")  # ← Comment dan News ga
-        print(f"News title: {new_form.news.title}")
-        print(f"News ID: {new_form.news.id}")
-        print("="*50)
            
         return  redirect(request.path)  
     def get_context_data(self, **kwargs):
