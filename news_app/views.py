@@ -12,6 +12,8 @@ from django.views.generic import (
     CreateView,
 )
 from django.urls import reverse_lazy, reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .user_permitions import OnlyLoggedSuperUsers
 
 
 def news_list(request):
@@ -181,21 +183,21 @@ class TexnologyPageView(ListView):
         return context
 
 
-class UpdatePageView(UpdateView):
+class UpdatePageView(OnlyLoggedSuperUsers, UpdateView):
     model = New
     template_name = "crud/update_page.html"
     fields = ("title", "body", "image", "status", "category")
     context_object_name = "news"
 
 
-class DeletePageView(DeleteView):
+class DeletePageView(OnlyLoggedSuperUsers, DeleteView):
     model = New
     template_name = "crud/delete_page.html"
     context_object_name = "news"
     success_url = reverse_lazy("home")
 
 
-class CreateNewsView(CreateView):
+class CreateNewsView(OnlyLoggedSuperUsers, CreateView):
     model = New
     fields = ("title", "image", "body", "status", "category")
     template_name = "crud/create_news.html"
