@@ -13,7 +13,8 @@ from .views import  (
     DetailPageNews, 
     UpdatePageView,
     DeletePageView,
-    CreateNewsView
+    CreateNewsView, 
+    admin_users_view,
 )
 
 urlpatterns = [
@@ -28,5 +29,6 @@ urlpatterns = [
     path('local/' , LocalPageView.as_view() , name = 'local_page'),
     path('sport/' ,SportPageView.as_view() , name = 'sport_page'),
     path('texno/' , TexnologyPageView.as_view() , name = 'texno_page'),
-    path('foreign/' , ForeignPageView.as_view() , name='foreign_page')
+    path('foreign/' , ForeignPageView.as_view() , name='foreign_page'),
+    path('adminpage/' , admin_users_view , name='admin_page')
 ]

@@ -14,6 +14,8 @@ from django.views.generic import (
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .user_permitions import OnlyLoggedSuperUsers
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required , user_passes_test
 
 
 def news_list(request):
@@ -201,6 +203,17 @@ class CreateNewsView(OnlyLoggedSuperUsers, CreateView):
     model = New
     fields = ("title", "image", "body", "status", "category")
     template_name = "crud/create_news.html"
-
+    
+@login_required
+@user_passes_test(lambda  u: u.is_superuser)
+def admin_users_view(request) :
+    
+    admin = User.objects.filter(is_superuser = True)
+    
+    context = {
+        'admin_users' : admin
+    }
+    
+    return render(request , 'news/admin_page.html' , context)
 
 # class DetailPageView(DetailView , ):

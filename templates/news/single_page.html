@@ -24,10 +24,12 @@
           <div class="single_page_content">
             <img class="img-center" src="{{news.image.url}}" alt="">
             <p>{{news.body}}</p>
+            {% if request.user.is_authenticated and request.user.is_superuser %}
             <div style="text-align: center;">
               <a href="{% url 'news_edit' news.slug %}" type="button" class="btn default-btn">Tahrirlash</a>
               <a href="{% url 'news_delete' news.slug %}" type="button" class="btn btn-red">O'chirish</a>
             </div>
+            {% endif %}
           </div>
           <div class="social_link">
             <ul class="sociallink_nav">

@@ -1,0 +1,25 @@
+{% extends "news/base.html" %}
+
+{% block title %}Admin Sahifa{% endblock title %}
+
+{% block content %}
+<table class="table ">
+    <thead>
+        <tr>
+            <th>UserName</th>
+            <th>Ismi</th>
+            <th>Familya</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for admin in admin_users %}
+        <tr>
+            <td>{{admin.username}}</td>
+            <td>{{admin.first_name}}</td>
+            <td>{{admin.last_name}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

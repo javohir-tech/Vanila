@@ -116,6 +116,7 @@ class UserProfileEditView(LoginRequiredMixin , View) :
             "account/profile_edit_form.html",
             {"user_form": user_form, "user_profile": user_profile},
         )
+        
 
 
 
