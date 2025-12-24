@@ -3,7 +3,12 @@
 {% block title %}Admin Sahifa{% endblock title %}
 
 {% block content %}
-<table class="table ">
+
+<div>
+    <a href="{% url 'create_news' %}" class="btn btn-primary">Yangilik Qo'shish</a>
+</div>
+
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>UserName</th>
