@@ -45,7 +45,6 @@ class DetailPageNews(DetailView):
             new_form = comment_form.save(commit=False)
             new_form.news = self.object
             new_form.user = request.user
-            # new_form.profile = request.user.profile
             new_form.save()
             
         return  redirect(request.path)  

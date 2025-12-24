@@ -64,7 +64,6 @@ class Contact(models.Model):
 class Comment(models.Model) :
     user  = models.ForeignKey(User ,  on_delete=models.CASCADE , related_name='comments')
     news = models.ForeignKey(New , on_delete=models.CASCADE , related_name='comments')
-    # profile = models.ForeignKey(ProfileModel , on_delete=models.CASCADE , related_name='comments')
     body  = models.TextField()
     created_time = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
