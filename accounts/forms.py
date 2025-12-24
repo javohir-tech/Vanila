@@ -40,6 +40,13 @@ class  UserEditForm(forms.ModelForm):
 
 
 class ProfileEditForm(forms.ModelForm) :
+    
+    date_of_birth = forms.DateTimeField(widget=forms.DateInput(
+        attrs={
+            'type' : 'date'
+        }
+    ))
+    
     class Meta :
         model = ProfileModel
         fields  = ['image' , 'date_of_birth']

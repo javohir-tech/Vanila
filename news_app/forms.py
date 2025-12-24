@@ -10,6 +10,15 @@ class ContactForm(forms.ModelForm):
 
 class CommentFrom(forms.ModelForm) :
     
+    body = forms.CharField(label="" , widget=forms.Textarea(
+        attrs={
+            'class' : 'form-control',
+            'placeholder' : 'Comment Here' , 
+            'rows' : 4,
+            'cols' :50
+        }
+    ))
+    
     class Meta :
         model  = Comment 
         fields = ['body']
