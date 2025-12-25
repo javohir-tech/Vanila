@@ -1,13 +1,23 @@
 {% extends "news/base.html" %}
 
-{% block  title %}Search Result{% endblock title %}
+{% block title %}Search Result{% endblock title %}
 
 {% block content %}
 
 <h1>Qidiruv natijalari</h1>
 
+<div class="row">
 {% for new in news %}
-    <h3>{{new.title}}</h3>
+    <a href="{% url 'news_detail' new.slug %}" class="col col-md-4 col-xl-3">
+        <div class="card" >
+            <img src="{{new.image.url}}" class="card-img-top img-fluid search-result-image" alt="new.slug">
+            <div class="card-body">
+                <h5 class="card-title">{{new.title|truncatewords:10}}</h5>
+                <p class="card-text">{{new.body|truncatewords:10}}</p>
+            </div>
+        </div>
+    </a>
 {% endfor %}
+</div>
 
 {% endblock content %}
