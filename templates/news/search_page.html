@@ -1,0 +1,13 @@
+{% extends "news/base.html" %}
+
+{% block  title %}Search Result{% endblock title %}
+
+{% block content %}
+
+<h1>Qidiruv natijalari</h1>
+
+{% for new in news %}
+    <h3>{{new.title}}</h3>
+{% endfor %}
+
+{% endblock content %}

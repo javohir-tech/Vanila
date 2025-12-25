@@ -15,6 +15,7 @@ from .views import  (
     DeletePageView,
     CreateNewsView, 
     admin_users_view,
+    SearchPageView
 )
 
 urlpatterns = [
@@ -30,5 +31,6 @@ urlpatterns = [
     path('sport/' ,SportPageView.as_view() , name = 'sport_page'),
     path('texno/' , TexnologyPageView.as_view() , name = 'texno_page'),
     path('foreign/' , ForeignPageView.as_view() , name='foreign_page'),
-    path('adminpage/' , admin_users_view , name='admin_page')
+    path('adminpage/' , admin_users_view , name='admin_page'),
+    path('search_result/' , SearchPageView.as_view() , name='search_result')
 ]
