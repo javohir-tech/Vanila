@@ -226,5 +226,10 @@ def admin_users_view(request):
 
     return render(request, "news/admin_page.html", context)
 
+class SearchPageView(ListView):
+    template_name = 'news/search_page.html'
+    model = New
+    context_object_name  = 'news'
+
 
 # class DetailPageView(DetailView , ):
