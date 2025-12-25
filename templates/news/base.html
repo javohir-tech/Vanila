@@ -83,7 +83,7 @@
                         <li><a href="{% url 'contact-us' %}">Contact Us</a></li>
                         <li><a href="{% url '404' %}">404 Page</a></li>
                         <li>
-                            <form method="get">
+                            <form method="get" action="{% url 'search_result' %}">
                                 <input type="search" name="q" placeholder="Search...">
                             </form>
                         </li>

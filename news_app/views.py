@@ -230,6 +230,10 @@ class SearchPageView(ListView):
     template_name = 'news/search_page.html'
     model = New
     context_object_name  = 'news'
+    
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return New.objects.filter(title__icontains = query)
 
 
 # class DetailPageView(DetailView , ):
