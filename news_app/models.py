@@ -3,7 +3,8 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.urls import reverse
 from django.contrib.auth.models import User
-from accounts.models import ProfileModel
+from hitcount.models  import HitCount , HitCountMixin
+from django.contrib.contenttypes.fields import GenericRelation
 # from .managers import PublishedManager
 
 class PublishedManager(models.Manager) :
@@ -16,7 +17,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class New(models.Model):
+class New(models.Model , HitCountMixin):
 
     class Status(models.TextChoices):
         Draft = "DF", "Draft"
@@ -30,6 +31,7 @@ class New(models.Model):
     publish_time = models.DateTimeField(default=timezone.now)
     created_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
+    views = GenericRelation(HitCount , object_id_field='object_pk' , related_query_name='hit_count_generic_relation')
     status = models.CharField(
         max_length=2, choices=Status.choices, default=Status.Draft
     )

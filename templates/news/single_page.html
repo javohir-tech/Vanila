@@ -1,6 +1,6 @@
 {% extends "news/base.html" %}
 {% load static %}
-
+{% load hitcount_tags %}
 {% block title %}{{news.title}}{% endblock title %}
 {% block content %}
 
@@ -17,7 +17,7 @@
           <h1>{{news.title}}</h1>
           <div class="post_commentbox">
             <a href="#">
-              <i class="fa fa-user"></i>Wpfreeware</a>
+              <i class="fa fa-user"></i>{{news.views.first.hits}}</a>
             <span><i class="fa fa-calendar"></i>{{news.publish_time}}</span>
             <a href="#"><i class="fa fa-tags"></i>{{news.category}}</a>
           </div>

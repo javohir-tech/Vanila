@@ -17,6 +17,7 @@ from .user_permitions import OnlyLoggedSuperUsers
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Q
+from hitcount.views import HitCountDetailView
 
 
 def news_list(request):
@@ -34,9 +35,10 @@ def news_detail(request, slug):
     return render(request, "news/news_detail.html", context=context)
 
 
-class DetailPageNews(DetailView):
+class DetailPageNews(HitCountDetailView):
     model = New
     template_name = "news/single_page.html"
+    count_hit = True
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
