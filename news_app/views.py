@@ -17,8 +17,9 @@ from .user_permitions import OnlyLoggedSuperUsers
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Q
-from hitcount.views import HitCountDetailView
-
+from hitcount.utils  import get_hitcount_model
+from hitcount.models import HitCountMixin #korishlar sonin oshiradi farqi istalgan view bilan ishlaydi va qolda yozish kerak 
+from hitcount.views import HitCountDetailView # Korishlar sonini ortiradi contextga hit avtomatik qoshiladi , Faqat detail Pagelar uchun ishlaydi 
 
 def news_list(request):
     news_list = New.objects.all()
@@ -35,7 +36,7 @@ def news_detail(request, slug):
     return render(request, "news/news_detail.html", context=context)
 
 
-class DetailPageNews(HitCountDetailView):
+class DetailPageNews( HitCountDetailView):
     model = New
     template_name = "news/single_page.html"
     count_hit = True
@@ -62,7 +63,9 @@ class DetailPageNews(HitCountDetailView):
             .filter(category__name=self.object.category)
             .order_by("?")[:3]
         )
-
+        
+        # hit_count = get_hitcount_model().objects.get_for_object(self.object)
+        # context['hits'] = hit_count.hits
         return context
 
 

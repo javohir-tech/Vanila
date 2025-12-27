@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.urls import reverse
 from django.contrib.auth.models import User
-from hitcount.models  import HitCount , HitCountMixin
+from hitcount.models  import HitCount 
 from django.contrib.contenttypes.fields import GenericRelation
 # from .managers import PublishedManager
 
@@ -17,7 +17,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class New(models.Model , HitCountMixin):
+class New(models.Model ):
 
     class Status(models.TextChoices):
         Draft = "DF", "Draft"

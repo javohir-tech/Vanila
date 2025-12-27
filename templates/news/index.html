@@ -1,5 +1,6 @@
 {% extends "news/base.html" %}
 {% load static %}
+{% load hitcount_tags %}
 {% block content %}
 <section id="sliderSection">
     <div class="row">
@@ -40,6 +41,13 @@
                                     <a href="{{news.get_absolute_url}}" class="catg_title">
                                         {{news.title}}
                                     </a>
+                                    <p><i class="fa fa-eye"></i>
+                                        {%if news.views.first %}
+                                        {{news.views.first.hits}}
+                                        {% else %}
+                                        0
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
                         </li>
@@ -95,6 +103,13 @@
                                         <a href="{{local_news.get_absolute_url}}" class="catg_title">
                                             {{local_news.title}}
                                         </a>
+                                        <p><i class="fa fa-eye"></i>
+                                            {%if local_news.views.first%}
+                                            {{local_news.views.first.hits}}
+                                            {% else %}
+                                            0
+                                            {% endif %}
+                                        </p>
                                     </div>
                                 </div>
                             </li>
@@ -276,7 +291,7 @@
                                     </a>
                                     <div class="media-body">
                                         <a href="{{sport.get_absolute_url}}" class="catg_title">
-                                           {{sport.title }}
+                                            {{sport.title }}
                                         </a>
                                     </div>
                                 </div>
@@ -410,7 +425,7 @@
                         <option>Kategoriyani tanlang</option>
                         {% for category in categories %}
                         <option>{{category.name}}</option>
-                       {% endfor %}
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="single_sidebar wow fadeInDown">
