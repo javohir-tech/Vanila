@@ -41,12 +41,14 @@
                                     <a href="{{news.get_absolute_url}}" class="catg_title">
                                         {{news.title}}
                                     </a>
-                                    <p><i class="fa fa-eye"></i>
+                                    <p>
+                                        <i class="fa fa-eye"></i>
                                         {%if news.views.first %}
                                         {{news.views.first.hits}}
                                         {% else %}
                                         0
                                         {% endif %}
+                                        C{{news.comments.count}}
                                     </p>
                                 </div>
                             </div>
