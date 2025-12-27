@@ -3,13 +3,16 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.urls import reverse
 from django.contrib.auth.models import User
-from hitcount.models  import HitCount 
+from hitcount.models import HitCount
 from django.contrib.contenttypes.fields import GenericRelation
+
 # from .managers import PublishedManager
 
-class PublishedManager(models.Manager) :
+
+class PublishedManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(status  =  New.Status.Published)
+        return super().get_queryset().filter(status=New.Status.Published)
+
 
 class Category(models.Model):
     name = models.CharField(max_length=150)
@@ -17,7 +20,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class New(models.Model ):
+
+class New(models.Model):
 
     class Status(models.TextChoices):
         Draft = "DF", "Draft"
@@ -31,7 +35,11 @@ class New(models.Model ):
     publish_time = models.DateTimeField(default=timezone.now)
     created_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
-    views = GenericRelation(HitCount , object_id_field='object_pk' , related_query_name='hit_count_generic_relation')
+    views = GenericRelation(
+        HitCount,
+        object_id_field="object_pk",
+        related_query_name="hit_count_generic_relation",
+    )
     status = models.CharField(
         max_length=2, choices=Status.choices, default=Status.Draft
     )
@@ -49,29 +57,30 @@ class New(models.Model ):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
-        
+
     def get_absolute_url(self):
-        return reverse("news_detail" , kwargs={'slug' : self.slug})
-    
+        return reverse("news_detail", kwargs={"slug": self.slug})
 
 
 class Contact(models.Model):
-    name =  models.CharField(max_length=150)
+    name = models.CharField(max_length=150)
     email = models.EmailField(max_length=150)
     message = models.TextField()
-    
+
     def __str__(self):
         return self.email
-    
-class Comment(models.Model) :
-    user  = models.ForeignKey(User ,  on_delete=models.CASCADE , related_name='comments')
-    news = models.ForeignKey(New , on_delete=models.CASCADE , related_name='comments')
-    body  = models.TextField()
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+    news = models.ForeignKey(New, on_delete=models.CASCADE, related_name="comments")
+    body = (models.TextField())
     created_time = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
-    
-    class Meta :
-        ordering = ['created_time' ,]
-        
+    class Meta:
+        ordering = [
+            "created_time",
+        ]
+
     def __str__(self):
         return f"{self.body}"

@@ -20,6 +20,7 @@
               <i class="fa fa-eye"></i>{{news.views.first.hits}}</a>
             <span><i class="fa fa-calendar"></i>{{news.publish_time}}</span>
             <a href="#"><i class="fa fa-tags"></i>{{news.category}}</a>
+            <a href="#">C{{comments_count}}</a>
           </div>
           <div class="single_page_content">
             <img class="img-center" src="{{news.image.url}}" alt="">
@@ -35,7 +36,7 @@
             <div>
               <h3>Izohlar</h3>
               {% for comment in news.comments.all %}
-              <div class="card " >
+              <div class="card ">
                 <div class="card-body">
                   <div style="display: flex; gap: 12px;">
                     {% if comment.user.profile.image.url %}
@@ -67,7 +68,7 @@
             </div>
             {% else %}
             <h4>Izoh qoldirish uchun <a href="{% url 'sing_up' %}">royhtadan</a> oting</h4>
-          
+
             {% endif %}
           </div>
           <div class="social_link">

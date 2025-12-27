@@ -50,22 +50,19 @@ class DetailPageNews( HitCountDetailView):
             new_form.news = self.object
             new_form.user = request.user
             new_form.save()
-
         return redirect(request.path)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["news"] = self.object
         context["comment_form"] = CommentFrom()
+        context['comments_count'] = self.object.comments.count()
         context["related_posts"] = (
             New.published.all()
             .exclude(id=self.object.id)
             .filter(category__name=self.object.category)
             .order_by("?")[:3]
         )
-        
-        # hit_count = get_hitcount_model().objects.get_for_object(self.object)
-        # context['hits'] = hit_count.hits
         return context
 
 
