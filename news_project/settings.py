@@ -121,8 +121,8 @@ LANGUAGES = [("uz", _("Uzbek")), ("en", _("English")), ("ru", _("Russian"))]
 
 STATIC_URL = "/static/"
 
-STATIC_ROOT = "home/djangomo/django-mohirdev-demo.uz/django/staticfiles"
-STATICFILES_DIRS = ("home/djangomo/django-mohirdev-demo.uz/django/static",)
+STATIC_ROOT = "/home/djangomo/django-mohirdev-demo.uz/django/staticfiles"
+STATICFILES_DIRS = ("/home/djangomo/django-mohirdev-demo.uz/django/static",)
 # STATICFILES_DIRS = [BASE_DIR / "static"]
 # STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_FINDERS = [
@@ -131,7 +131,7 @@ STATICFILES_FINDERS = [
 ]
 
 MEDIA_URL = "media/"
-MEDIA_ROOT = 'home/djangomo/django-mohirdev-demo.uz/django/media'
+MEDIA_ROOT = '/home/djangomo/django-mohirdev-demo.uz/django/media'
 # MEDIA_ROOT = BASE_DIR / "media/"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
