@@ -8,6 +8,7 @@ django = "*"
 django-environ = "*"
 pillow = "*"
 django-hitcount = "*"
+python-decouple = "*"
 
 [dev-packages]
 
