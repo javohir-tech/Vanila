@@ -9,6 +9,7 @@ django-environ = "*"
 pillow = "*"
 django-hitcount = "*"
 python-decouple = "*"
+whitenoise = "*"
 
 [dev-packages]
 
